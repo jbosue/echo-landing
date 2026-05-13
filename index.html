@@ -1105,53 +1105,53 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
     <div class="form-row">
       <div class="form-group">
         <label>Nombre</label>
-        <input type="text" placeholder="Tu nombre">
+        <input type="text" name="firstname" placeholder="Tu nombre">
       </div>
       <div class="form-group">
         <label>Empresa</label>
-        <input type="text" placeholder="Empresa u oficina">
+        <input type="text" name="company" placeholder="Empresa u oficina">
       </div>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label>Email</label>
-        <input type="email" placeholder="correo@empresa.com">
+        <input type="email" name="email" placeholder="correo@empresa.com">
       </div>
       <div class="form-group">
         <label>Teléfono / WhatsApp</label>
-        <input type="tel" placeholder="+57 300 000 0000">
+        <input type="tel" name="phone" placeholder="+57 300 000 0000">
       </div>
     </div>
     <div class="form-group">
       <label>Tipo de proyecto</label>
-      <select>
+      <select name="tipo_proyecto_echo">
         <option value="" disabled selected>Seleccionar...</option>
-        <option>Interiorismo corporativo / oficinas</option>
-        <option>Mobiliario y muebles</option>
-        <option>Arquitectura y construcción</option>
-        <option>Proyecto con requisitos ambientales formales</option>
-        <option>Retail y espacios comerciales</option>
-        <option>Mobiliario urbano / exterior</option>
-        <option>Otro</option>
+        <option value="interiorismo_corporativo">Interiorismo corporativo / oficinas</option>
+        <option value="mobiliario_muebles">Mobiliario y muebles</option>
+        <option value="arquitectura_construccion">Arquitectura y construcción</option>
+        <option value="requisitos_ambientales">Proyecto con requisitos ambientales formales</option>
+        <option value="retail_comercial">Retail y espacios comerciales</option>
+        <option value="mobiliario_urbano">Mobiliario urbano / exterior</option>
+        <option value="otro">Otro</option>
       </select>
     </div>
     <div class="form-row">
       <div class="form-group">
         <label>Cantidad de paneles estimada</label>
-        <input type="text" placeholder="Ej: 10 paneles">
+        <input type="text" name="cantidad_paneles_echo" placeholder="Ej: 10 paneles">
       </div>
       <div class="form-group">
         <label>¿Necesita ficha técnica?</label>
-        <select>
-          <option>Sí, para especificación</option>
-          <option>Sí, junto con muestra física</option>
-          <option>No por ahora</option>
+        <select name="ficha_tecnica_echo">
+          <option value="si_especificacion">Sí, para especificación</option>
+          <option value="si_con_muestra">Sí, junto con muestra física</option>
+          <option value="no">No por ahora</option>
         </select>
       </div>
     </div>
     <div class="form-group">
       <label>Descripción del proyecto (opcional)</label>
-      <textarea placeholder="Cuéntanos brevemente el uso, espacio y cualquier requisito específico..."></textarea>
+      <textarea name="message" placeholder="Cuéntanos brevemente el uso, espacio y cualquier requisito específico..."></textarea>
     </div>
     <button class="btn-form" type="submit">Enviar cotización →</button>
   </div>
@@ -1171,37 +1171,27 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
   document.querySelector('.btn-form').addEventListener('click', async function(e) {
     e.preventDefault();
     const btn = this;
-    const form = btn.closest('section').querySelector('.form-grid');
+    const form = document.querySelector('.form-grid');
 
-    const getValue = (label) => {
-      const groups = form.querySelectorAll('.form-group');
-      for (const g of groups) {
-        const lbl = g.querySelector('label');
-        if (lbl && lbl.textContent.trim().toLowerCase().includes(label)) {
-          const el = g.querySelector('input, select, textarea');
-          return el ? el.value.trim() : '';
-        }
-      }
-      return '';
-    };
+    const val = (name) => (form.querySelector(`[name="${name}"]`)?.value || '').trim();
 
-    const fields = [
-      { name: 'firstname',             value: getValue('nombre') },
-      { name: 'company',               value: getValue('empresa') },
-      { name: 'email',                 value: getValue('email') },
-      { name: 'phone',                 value: getValue('tel') },
-      { name: 'tipo_proyecto_echo',    value: getValue('tipo de proyecto') },
-      { name: 'cantidad_paneles_echo', value: getValue('cantidad') },
-      { name: 'ficha_tecnica_echo',    value: getValue('ficha') },
-      { name: 'message',               value: getValue('descripci') },
-    ].filter(f => f.value !== '');
-
-    const email = fields.find(f => f.name === 'email');
-    if (!email || !email.value) {
+    const email = val('email');
+    if (!email) {
       btn.textContent = 'Ingresa tu email para continuar';
       setTimeout(() => { btn.textContent = 'Enviar cotización →'; }, 2500);
       return;
     }
+
+    const fields = [
+      { name: 'firstname',             value: val('firstname') },
+      { name: 'company',               value: val('company') },
+      { name: 'email',                 value: email },
+      { name: 'phone',                 value: val('phone') },
+      { name: 'tipo_proyecto_echo',    value: val('tipo_proyecto_echo') },
+      { name: 'cantidad_paneles_echo', value: val('cantidad_paneles_echo') },
+      { name: 'ficha_tecnica_echo',    value: val('ficha_tecnica_echo') },
+      { name: 'message',               value: val('message') },
+    ].filter(f => f.value !== '');
 
     btn.textContent = 'Enviando...';
     btn.disabled = true;
