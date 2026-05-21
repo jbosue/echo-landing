@@ -613,6 +613,29 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
     margin-bottom: 36px;
     max-width: 360px;
   }
+  .form-column {
+    display: flex;
+    flex-direction: column;
+  }
+  .contacto-qualifier {
+    font-size: 15px;
+    color: var(--gris);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 100%;
+  }
+  .contacto-no {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--crema);
+    background: rgba(255,255,255,0.05);
+    border-left: 2px solid var(--rojo);
+    padding: 6px 10px;
+    letter-spacing: 0.02em;
+  }
   .contacto-datos {
     display: flex;
     flex-direction: column;
@@ -1129,6 +1152,8 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
       </div>
     </div>
   </div>
+  <div class="form-column">
+  <p class="contacto-qualifier">Para arquitectos, diseñadores de interiores, fabricantes de mobiliario comercial, retail y proyectos de construcción con especificación técnica.<br><span class="contacto-no">Este material no es para muebles de cocina ni mobiliario residencial.</span></p>
   <div class="form-grid">
     <div class="form-row">
       <div class="form-group">
@@ -1182,6 +1207,7 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
       <textarea name="message" placeholder="Cuéntanos brevemente el uso, espacio y cualquier requisito específico..."></textarea>
     </div>
     <button class="btn-form" type="submit">Enviar cotización →</button>
+  </div>
   </div>
 </section>
 
