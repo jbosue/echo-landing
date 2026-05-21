@@ -1208,7 +1208,13 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             fields,
-            context: { pageUri: window.location.href, pageName: document.title }
+            context: {
+              pageUri: window.location.href,
+              pageName: document.title,
+              ...(document.cookie.match(/hubspotutk=([^;]+)/)?.[1]
+                ? { hutk: document.cookie.match(/hubspotutk=([^;]+)/)[1] }
+                : {})
+            }
           })
         }
       );
