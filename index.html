@@ -537,6 +537,51 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
     line-height: 1.6;
   }
 
+  /* FILMSTRIP */
+  .filmstrip-section {
+    background: var(--negro);
+    overflow: hidden;
+    height: 85vh;
+    max-height: 860px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+  }
+  .filmstrip-col {
+    overflow: hidden;
+    position: relative;
+  }
+  .filmstrip-col-inner {
+    display: flex;
+    flex-direction: column;
+    will-change: transform;
+    animation: filmstrip-up 32s linear infinite;
+  }
+  .filmstrip-col-inner-reverse {
+    animation: filmstrip-down 40s linear infinite;
+  }
+  @keyframes filmstrip-up {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+  @keyframes filmstrip-down {
+    0%   { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
+  }
+  .filmstrip-img {
+    flex-shrink: 0;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    margin-bottom: 3px;
+  }
+  .filmstrip-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+
   /* CTA FINAL */
   .cta-section {
     background: var(--rojo);
@@ -625,16 +670,17 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
     max-width: 100%;
   }
   .contacto-no {
-    display: inline-block;
-    margin-top: 10px;
+    display: block;
+    margin-top: 14px;
     font-family: 'DM Mono', monospace;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
-    color: var(--crema);
-    background: rgba(255,255,255,0.05);
-    border-left: 2px solid var(--rojo);
-    padding: 6px 10px;
-    letter-spacing: 0.02em;
+    color: var(--negro);
+    background: var(--crema);
+    border-left: 3px solid var(--rojo);
+    padding: 14px 16px;
+    letter-spacing: 0.01em;
+    line-height: 2.1;
   }
   .contacto-datos {
     display: flex;
@@ -786,6 +832,8 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
     .paso::after { display: none; }
     .esg-strip { grid-template-columns: 1fr; gap: 40px; padding: 60px 24px; }
     .cta-section { grid-template-columns: 1fr; padding: 64px 24px; gap: 32px; }
+    .filmstrip-section { grid-template-columns: 1fr; height: 90vh; max-height: 700px; }
+    .filmstrip-col-right { display: none; }
     .contacto-section { grid-template-columns: 1fr; padding: 64px 24px; gap: 48px; }
     .form-row { grid-template-columns: 1fr; }
     footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
@@ -1132,6 +1180,38 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
   </div>
 </div>
 
+<!-- FILMSTRIP -->
+<div class="filmstrip-section">
+  <!-- Columna izquierda: sube (visible en mobile) -->
+  <div class="filmstrip-col">
+    <div class="filmstrip-col-inner">
+      <div class="filmstrip-img"><img src="counter.jpg" alt="Counter con panel ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aqua.png" alt="Panel ECHO aqua" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aplicacion-recepcion.jpg" alt="Recepción con paneles ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="panel-negro-real.jpg" alt="Panel ECHO negro" loading="lazy"></div>
+      <!-- duplicado para loop continuo -->
+      <div class="filmstrip-img"><img src="counter.jpg" alt="Counter con panel ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aqua.png" alt="Panel ECHO aqua" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aplicacion-recepcion.jpg" alt="Recepción con paneles ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="panel-negro-real.jpg" alt="Panel ECHO negro" loading="lazy"></div>
+    </div>
+  </div>
+  <!-- Columna derecha: baja (solo desktop) -->
+  <div class="filmstrip-col filmstrip-col-right">
+    <div class="filmstrip-col-inner filmstrip-col-inner-reverse">
+      <div class="filmstrip-img"><img src="cnc maquina.png" alt="Maquinado CNC panel ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aplicacion-sillones.jpg" alt="Sillones con panel ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aplicacion-mesa-trabajo.jpg" alt="Mesa de trabajo ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="muestras-fisicas.jpg" alt="Muestras físicas ECHO" loading="lazy"></div>
+      <!-- duplicado para loop continuo -->
+      <div class="filmstrip-img"><img src="cnc maquina.png" alt="Maquinado CNC panel ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aplicacion-sillones.jpg" alt="Sillones con panel ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="aplicacion-mesa-trabajo.jpg" alt="Mesa de trabajo ECHO" loading="lazy"></div>
+      <div class="filmstrip-img"><img src="muestras-fisicas.jpg" alt="Muestras físicas ECHO" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+
 <!-- CONTACTO -->
 <section id="contacto" class="contacto-section">
   <div class="contacto-info">
@@ -1153,7 +1233,13 @@ src="https://www.facebook.com/tr?id=2326551501149397&ev=PageView&noscript=1"/></
     </div>
   </div>
   <div class="form-column">
-  <p class="contacto-qualifier">Para arquitectos, diseñadores de interiores, fabricantes de mobiliario comercial, retail y proyectos de construcción con especificación técnica.<br><span class="contacto-no">Este material no es para muebles de cocina ni mobiliario residencial.</span></p>
+  <p class="contacto-qualifier">Para arquitectos, diseñadores de interiores, fabricantes de mobiliario comercial, retail y proyectos de construcción con especificación técnica.</p>
+  <div class="contacto-no">
+    × No es para mesones de cocina<br>
+    × No reemplaza la melamina<br>
+    × No aplica para carpintería convencional<br>
+    → Solo proyectos de diseño a escala
+  </div>
   <div class="form-grid">
     <div class="form-row">
       <div class="form-group">
