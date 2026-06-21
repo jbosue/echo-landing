@@ -1370,6 +1370,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         btn.textContent = '✓ Recibido — respondemos en 24h';
         btn.style.background = '#1a1a1a';
         fbq('track', 'Lead');
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({ event: 'form_submit_echo' });
       } else {
         const errBody = await res.json().catch(() => ({}));
         console.error('HubSpot error', res.status, errBody);
